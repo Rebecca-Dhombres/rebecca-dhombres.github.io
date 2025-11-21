@@ -1,7 +1,4 @@
-@font-face {
-    font-family: "mulish";
-    src: url("Mulish-Regular.woff2") format("woff2")
-}
+
 *{
     box-sizing: border-box;
 }
@@ -16,11 +13,16 @@ body{
 
 p{
     max-width: 600px;
+    font-family: "roc-grotesk", sans-serif;
+font-weight: 400;
+font-style: normal;
 }
 
 h1{
     margin: 0;
-    font-family: sans-serif;
+    font-family: "roc-grotesk", sans-serif;
+font-weight: 700;
+font-style: normal;
     color: #fffcec;
 }
 img{
