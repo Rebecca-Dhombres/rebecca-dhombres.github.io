@@ -10,41 +10,191 @@
     <link rel="shortcut icon" href="img/logoicon.svg">
     <link rel="stylesheet" href="style.css">
 </head>
-
+<body>
+    
     <header class="header">
-
-         <a href="/"><img src="logo-rd1.svg" alt="Rebecca Dhombres Logo" width="70" height="22"></a>
-
-         <h1><a href="/">Rebecca Dhombres</a></h1>
-
-         <a href="a-propos.html" class="propos">à propos</a>
-         
+        
+        <a href="/"><img src="logo-rd1.svg" alt="Rebecca Dhombres Logo" width="70" height="22"></a>
+        
+        <h1><a href="/">Rebecca Dhombres</a></h1>
+        
+        <a href="a-propos.html" class="propos">à propos</a>
+        
     </header>
-
-    <div class="about">
-        <h1>Je suis...</h1>
-        <a class="gird-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint soluta fugit iste quasi maxime magnam praesentium, explicabo consectetur rem sit. Totam placeat ullam quae ea tempore quam, eos cumque pariatu Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima reiciendis deleniti porro est dignissimos distinctio enim? Deserunt reprehenderit saepe fugiat? Sapiente placeat dolorem dolores? Omnis ullam similique facilis soluta inventore? Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reiciendis, suscipit ad porro neque temporibus sapiente officia illum. Optio sunt vero eum cum tenetur sequi eveniet fuga, officia molestias animi iure.</a>
-        <a class="grid-txt" href="https://www.instagram.com/_gravelotte">
-        <div class="projets">Insta : @_gravelotte</div>
-        </a>
+    <section class="section-propos">
+       <h3> Je <br> suis...</h3>
+     </section>
+    <div class="grid">
+        <div>
+            <p class="gird-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint soluta fugit iste quasi maxime magnam praesentium, explicabo consectetur rem sit. Totam placeat ullam quae ea tempore quam, eos cumque pariatu Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima reiciendis deleniti porro est dignissimos distinctio enim? Deserunt reprehenderit saepe fugiat? Sapiente placeat dolorem dolores? Omnis ullam similique facilis soluta inventore? Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reiciendis, suscipit ad porro neque temporibus sapiente officia illum. Optio sunt vero eum cum tenetur sequi eveniet fuga, officia molestias animi iure.</p>
         <a class="grid-txt" href="image/Portfolio.pdf">
             <span class="projets">Portfolio</span>
         </a>
         <a class="grid-txt" href="image/CV.pdf">
-        <span class="projets">CV</span>
+            <span class="projets">CV</span>
+        </a>
+        <a class="grid-txt" href="https://www.instagram.com/dhombres_design">
+            <span class="projets">Insta : @dhombres_design</span>
         </a>
         <a class="grid-txt" href="https://ecole-lycee-renoir-paris.fr/">
-        <span> École : ELMAD Renoir  </span>
-    
+            <span> École : ELMAD Renoir  </span>  
+        </a>
+        </div>
+        <div class="canva"><canvas id="canvas"></canvas></div>
 
-
-
-
-           
-         
-      
-
-             
-  </a>
     </div>
-    <div></div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <script>
+        const $canvas = document.querySelector('#canvas');
+        let arrows = [];
+let animating = false;
+let animationProgress = 0;
+const animationDuration = 180;
+let arrowImg;
+
+class Arrow {
+  constructor(x, y, direction) {
+    this.startX = x;
+    this.startY = y;
+    this.x = x;
+    this.y = y;
+    this.direction = direction;
+    this.angle = direction * HALF_PI;
+    this.moveDistance = 90;
+  }
+
+  update(progress) {
+    if (progress <= 0.4) {
+      const t = progress / 0.4;
+      const eased = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+
+      if (this.direction === 0) {
+        this.x = this.startX;
+        this.y = this.startY - this.moveDistance * eased;
+      } else if (this.direction === 1) {
+        this.x = this.startX + this.moveDistance * eased;
+        this.y = this.startY;
+      } else if (this.direction === 2) {
+        this.x = this.startX;
+        this.y = this.startY + this.moveDistance * eased;
+      } else {
+        this.x = this.startX - this.moveDistance * eased;
+        this.y = this.startY;
+      }
+    } else if (progress <= 0.5) {
+      const t = (progress - 0.4) / 0.1;
+      const turnAngle = t * TWO_PI;
+      this.angle = this.direction * HALF_PI + turnAngle;
+
+      if (this.direction === 0) {
+        this.x = this.startX;
+        this.y = this.startY - this.moveDistance;
+      } else if (this.direction === 1) {
+        this.x = this.startX + this.moveDistance;
+        this.y = this.startY;
+      } else if (this.direction === 2) {
+        this.x = this.startX;
+        this.y = this.startY + this.moveDistance;
+      } else {
+        this.x = this.startX - this.moveDistance;
+        this.y = this.startY;
+      }
+    } else {
+      const t = (progress - 0.5) / 0.5;
+      const eased = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+
+      if (this.direction === 0) {
+        this.x = this.startX;
+        this.y = this.startY - this.moveDistance * (1 - eased);
+      } else if (this.direction === 1) {
+        this.x = this.startX + this.moveDistance * (1 - eased);
+        this.y = this.startY;
+      } else if (this.direction === 2) {
+        this.x = this.startX;
+        this.y = this.startY + this.moveDistance * (1 - eased);
+      } else {
+        this.x = this.startX - this.moveDistance * (1 - eased);
+        this.y = this.startY;
+      }
+
+      this.angle = this.direction * HALF_PI;
+    }
+  }
+
+  display() {
+    push();
+    translate(this.x, this.y);
+    rotate(this.angle);
+
+    if (arrowImg && arrowImg.width > 0) {
+      imageMode(CENTER);
+      image(arrowImg, 0, 0, 160, 160);
+    } else {
+      fill(100, 150, 255);
+      stroke(50, 100, 200);
+      strokeWeight(2);
+
+      beginShape();
+      vertex(0, -20);
+      vertex(12, 8);
+      vertex(5, 8);
+      vertex(5, 20);
+      vertex(-5, 20);
+      vertex(-5, 8);
+      vertex(-12, 8);
+      endShape(CLOSE);
+    }
+
+    pop();
+  }
+}
+
+function preload() {
+  // PUT YOUR PNG FILENAME HERE:
+  arrowImg = loadImage("arrow.png"); // Replace with your actual filename
+}
+
+function setup() {
+  createCanvas(600, 600,P2D,$canvas);
+
+  const spacing = 170;
+  const centerX = width / 2;
+  const centerY = height / 2;
+
+  arrows.push(new Arrow(centerX - spacing / 2, centerY - spacing / 2, 0));
+  arrows.push(new Arrow(centerX + spacing / 2, centerY - spacing / 2, 1));
+  arrows.push(new Arrow(centerX + spacing / 2, centerY + spacing / 2, 2));
+  arrows.push(new Arrow(centerX - spacing / 2, centerY + spacing / 2, 3));
+
+  // Start animation automatically
+  animating = true;
+}
+
+function draw() {
+  background (255, 252, 236);
+
+  if (animating) {
+    animationProgress++;
+    const progress = animationProgress / animationDuration;
+
+    arrows.forEach((arrow) => arrow.update(progress));
+
+    if (animationProgress >= animationDuration) {
+      animationProgress = 0; // Reset to loop
+    }
+  }
+
+  arrows.forEach((arrow) => arrow.display());
+}
+
+function mousePressed() {
+  // Toggle animation on click
+  animating = !animating;
+}
+
+    </script>
+</body>
+</html>
