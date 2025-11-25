@@ -34,8 +34,8 @@ font-style: normal;
 h1{
     font-family: "roc-grotesk", sans-serif;
     font-weight: 400;
-    font-style: normal;
     font-size: 20px;
+    font-style: normal;
     color: #dd1d1d;
 
 }
@@ -222,15 +222,15 @@ img{
 .title-bloc{
   margin: 10px;
   font-size: 80px;
+  line-height: 80px;
+  padding-top: 50px;
 }
  .bloc {
-    width: 40%; 
-    height: 300px; 
+    width: 40%;  
     display: flex; 
     align-items: top; 
     padding-left: 20px; 
-    font-size:16px
-    column-count: 1;
+    font-size:16px;
     column-gap: 20px;
     box-sizing: border-box; 
 }
