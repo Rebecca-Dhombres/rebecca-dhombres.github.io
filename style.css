@@ -122,7 +122,9 @@ img{
     position: relative;
     box-sizing: border-box;
     min-height: fit-content;
+
 }
+
 .section-propos{
     padding-top: 10vh;
     padding-left: 20px;
@@ -350,6 +352,14 @@ img{
         display: flex !important;
         flex-wrap: wrap !important;
     }
+    h2{
+        font-size: 100px;
+        line-height: 90px;
+
+    }
+    .work-info span{
+        font-size: 15px;
+    }
     
 }
 
@@ -362,5 +372,12 @@ img{
     }
     .about-content{
         flex-direction: column !important;
+    }
+    h2{
+        font-size: 100px;
+        line-height: 90px;
+    }
+    .work-info span{
+        font-size: 30px;
     }
 }
