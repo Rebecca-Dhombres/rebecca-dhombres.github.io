@@ -381,6 +381,10 @@ img{
         line-height: 90px;
     }
     .work-info span{
-        font-size: 30px;
+        font-size: 15px;
     }
+        .bloc{
+        width: 90%;
+    }
+    
 }
